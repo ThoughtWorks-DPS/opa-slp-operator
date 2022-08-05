@@ -27,7 +27,7 @@ import (
 	ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
 
 	opav1alpha1 "github.com/ThoughtWorks-DPS/opa-slp-operator/api/v1alpha1"
-	"github.com/ThoughtWorks-DPS/opa-slp-operator/controller/styra/system"
+	"opa-slp-operator/controllers/styra/system"
 )
 
 // StyraLocalPlaneReconciler reconciles a StyraLocalPlane object
