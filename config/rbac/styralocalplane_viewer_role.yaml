@@ -1,0 +1,20 @@
+# permissions for end users to view styralocalplanes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: styralocalplane-viewer-role
+rules:
+- apiGroups:
+  - opa.twdps
+  resources:
+  - styralocalplanes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - opa.twdps
+  resources:
+  - styralocalplanes/status
+  verbs:
+  - get
