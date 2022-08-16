@@ -1,13 +1,13 @@
-# permissions for end users to edit styralocalplanes.
+# permissions for end users to edit slpdeployments.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: styralocalplane-editor-role
+  name: slpdeployment-editor-role
 rules:
 - apiGroups:
-  - opa.twdps
+  - opa.twdps.io
   resources:
-  - styralocalplanes
+  - slpdeployments
   verbs:
   - create
   - delete
@@ -17,8 +17,8 @@ rules:
   - update
   - watch
 - apiGroups:
-  - opa.twdps
+  - opa.twdps.io
   resources:
-  - styralocalplanes/status
+  - slpdeployments/status
   verbs:
   - get

@@ -1,9 +1,0 @@
-apiVersion: opa.twdps/v1alpha1
-kind: StyraLocalPlane
-metadata:
-  name: styralocalplane-sample
-spec:
-  systemName: "publications-dev-manual"
-  accessToken: "0123456"
-  namespace: opa-system
-  tag: "0.4.4"

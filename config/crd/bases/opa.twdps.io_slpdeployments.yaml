@@ -2,23 +2,20 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  annotations:
-    controller-gen.kubebuilder.io/version: v0.9.0
-  creationTimestamp: null
-  name: styralocalplanes.opa.twdps
+  name: slpdeployments.opa.twdps.io
 spec:
-  group: opa.twdps
+  group: opa.twdps.io
   names:
-    kind: StyraLocalPlane
-    listKind: StyraLocalPlaneList
-    plural: styralocalplanes
-    singular: styralocalplane
+    kind: SlpDeployment
+    listKind: SlpDeploymentList
+    plural: slpdeployments
+    singular: slpdeployment
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: StyraLocalPlane is the Schema for the styralocalplanes API
+        description: SlpDeployment is the Schema for the slpdeployments API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -33,27 +30,13 @@ spec:
           metadata:
             type: object
           spec:
-            description: StyraLocalPlaneSpec defines the desired state of StyraLocalPlane
-            properties:
-              accessToken:
-                type: string
-              namespace:
-                type: string
-              systemName:
-                type: string
-              tag:
-                type: string
+            description: Spec defines the desired state of SlpDeployment
             type: object
+            x-kubernetes-preserve-unknown-fields: true
           status:
-            description: StyraLocalPlaneStatus defines the observed state of StyraLocalPlane
-            properties:
-              ready:
-                type: string
-              status:
-                type: string
-            required:
-            - ready
+            description: Status defines the observed state of SlpDeployment
             type: object
+            x-kubernetes-preserve-unknown-fields: true
         type: object
     served: true
     storage: true

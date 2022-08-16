@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: opa.twdps.io
+  version: v1alpha1
+  kind: SlpDeployment
+  chart: helm-charts/slpdeployment
+#+kubebuilder:scaffold:watch

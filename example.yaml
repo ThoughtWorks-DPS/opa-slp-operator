@@ -1,0 +1,141 @@
+---
+# Source: slp/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: blue-dev-slp
+  namespace: blue-dev
+  labels:
+    app: blue-dev-slp
+    version: 0.4.4
+    system-type: istio
+    app.kubernetes.io/managed-by: opa-slp-operator-0.1.0
+    app.kubernetes.io/name: blue-dev-slp
+    app.kubernetes.io/version: 0.4.4
+    helm.sh/chart: slp-0.1.0
+---
+# Source: slp/templates/opa-sidecar-configmap.yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: slp-opa-sidecar-config
+  namespace: blue-dev
+data:
+  conf.yaml: |
+    discovery:
+      name: discovery
+      service: styra
+    labels:
+      system-id: f8d1bdca8d134f13985410ee9bd0ad6e
+      system-type: template.istio:1.0
+    services:
+    - name: styra
+      url: http://blue-dev-slp.blue-dev:8080/v1
+    - name: styra-bundles
+      url: http://blue-dev-slp.blue-dev:8080/v1/bundles
+---
+# Source: slp/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-dev-slp
+  namespace: blue-dev
+  labels:
+    app: blue-dev-slp
+    version: 0.4.4
+    system-type: istio
+    app.kubernetes.io/managed-by: opa-slp-operator-0.1.0
+    app.kubernetes.io/name: blue-dev-slp
+    app.kubernetes.io/version: 0.4.4
+    helm.sh/chart: slp-0.1.0
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: blue-dev-slp
+    version: 0.4.4
+    system-type: istio
+---
+# Source: slp/templates/statefuleset.yaml
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name:  blue-dev-slp
+  namespace: blue-dev
+  labels:
+    app: blue-dev-slp
+    version: 0.4.4
+    system-type: istio
+    app.kubernetes.io/managed-by: opa-slp-operator-0.1.0
+    app.kubernetes.io/name: blue-dev-slp
+    app.kubernetes.io/version: 0.4.4
+    helm.sh/chart: slp-0.1.0
+spec:
+  replicas: 1
+  serviceName:  blue-dev-slp
+  selector:
+    matchLabels:
+      app: blue-dev-slp
+      version: 0.4.4
+      system-type: istio
+  template:
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "false"
+      app: blue-dev-slp
+      version: 0.4.4
+      system-type: istio
+    spec:
+      containers:
+      - name: slp
+        image: "styra/styra-local-plane:0.4.4"
+        imagePullPolicy: Always
+        args:
+          - "--config-file=/config/das.yaml"
+          - "--addr=0.0.0.0:8080"
+          - "--auth=token"
+          - "--opa-auth-token=/config/opaToken"
+        livenessProbe:
+          httpGet:
+            path: /v1/system/alive
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /v1/system/ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+        volumeMounts:
+        - name: blue-dev-slp-credentials-vol
+          readOnly: true
+          mountPath: /config
+
+        - name: blue-dev-slp-scratch-vol
+          mountPath: /scratch
+
+      volumes:
+      - name: blue-dev-slp-credentials-vol
+        projected:
+          sources:
+            - secret:
+                secretName: das.yaml
+            - secret:
+                sexretName: opaToken
+
+  volumeClaimTemplates:
+  - metadata:
+      name: blue-dev-slp-scratch-vol
+      labels:
+        slp-pvc: blue-dev-slp-app-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi

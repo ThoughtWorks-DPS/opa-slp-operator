@@ -1,0 +1,68 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name:  {{ .Values.namespace }}-{{ include "slp.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "slp.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  serviceName:  {{ .Values.namespace }}-{{ include "slp.name" . }}
+  selector:
+    matchLabels:
+      {{- include "slp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "false"
+        {{- include "slp.selectorLabels" . | nindent 6 }}
+    spec:
+      containers:
+      - name: slp
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+          - "--config-file=/config/das.yaml"
+          - "--addr=0.0.0.0:8080"
+          - "--auth=token"
+          - "--opa-auth-token=/config/opaToken"
+        livenessProbe:
+          httpGet:
+            path: /v1/system/alive
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /v1/system/ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+        volumeMounts:
+        - name: {{ .Values.namespace }}-{{ include "slp.name" . }}-credentials-vol
+          readOnly: true
+          mountPath: /config
+
+        - name: {{ .Values.namespace }}-{{ include "slp.name" . }}-scratch-vol
+          mountPath: /scratch
+
+      volumes:
+      - name: {{ .Values.namespace }}-{{ include "slp.name" . }}-credentials-vol
+        projected:
+          sources:
+            - secret:
+                secretName: das.yaml
+            - secret:
+                sexretName: opaToken
+
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.namespace }}-{{ include "slp.name" . }}-scratch-vol
+      labels:
+        slp-pvc: {{ .Values.namespace }}-{{ include "slp.name" . }}-app-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi

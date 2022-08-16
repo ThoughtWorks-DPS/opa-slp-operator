@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 0.4.4
+description: Deploy Styra Local Plane to a namespace where opa sidecars are configured to read from slp 
+name: slp
+type: application
+version: 0.1.0

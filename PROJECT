@@ -1,19 +1,16 @@
-domain: twdps
+domain: twdps.io
 layout:
-- go.kubebuilder.io/v3
+- helm.sdk.operatorframework.io/v1
 plugins:
   manifests.sdk.operatorframework.io/v2: {}
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: opa-slp-operator
-repo: github.com/ThoughtWorks-DPS/opa-slp-operator
 resources:
 - api:
     crdVersion: v1
     namespaced: true
-  controller: true
-  domain: twdps
+  domain: twdps.io
   group: opa
-  kind: StyraLocalPlane
-  path: github.com/ThoughtWorks-DPS/opa-slp-operator/api/v1alpha1
+  kind: SlpDeployment
   version: v1alpha1
 version: "3"

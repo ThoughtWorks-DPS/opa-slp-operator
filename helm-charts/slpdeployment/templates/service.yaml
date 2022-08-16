@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.namespace }}-{{ include "slp.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "slp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.service.port }}
+  selector:
+    {{- include "slp.selectorLabels" . | nindent 4 }}

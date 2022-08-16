@@ -1,0 +1,68 @@
+# used to define the styra das api endpoint, e.g., https://tenant.svc.styra.com/v1
+tenant: "thoughtworks"
+# token used by slp service to communicate with styra das api
+slpDasToken: "a-das-system-token-goes-here"
+# pull the policy bundle from this das System id 
+systemId: "f8d1bdca8d134f13985410ee9bd0ad6e"
+# token used by opa sodecar to communicate with slp
+slpOpaToken: "an-opa-sidecar-to-slp-token-goes-here"
+# Operator will inject the namespace based on the namespace where the resource request was applied
+namespace: "blue-dev"
+
+nameOverride: ""
+
+replicaCount: 1
+
+image:
+  repository: styra/styra-local-plane
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
