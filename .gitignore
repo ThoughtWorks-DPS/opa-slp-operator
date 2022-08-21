@@ -13,4 +13,6 @@ bin
 *.swo
 *~
 *.env
-das-credentials.yaml
+publications-dev-slp-credentials.yaml
+reviews-dev-slp-credentials.yaml
+ztemp/

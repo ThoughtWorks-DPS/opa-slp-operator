@@ -1,0 +1,50 @@
+---
+version: 2.1
+
+orbs:
+  op: twdps/onepassword@1.0.0
+
+parameters:
+  context:
+    description: circleci context for all jobs
+    type: string
+    default: twdps-core-labs-team
+  machine-image:
+    description: circleci machine to use for operator build jobs
+    type: string
+    default: ubuntu-2204:2022.07.1
+  shell-options:
+    description: shell options for all jobs
+    type: string
+    default: op run --env-file op.env -- /bin/bash -eo pipefail
+
+on-push-main: &on-push-main
+  branches:
+    only: /main/
+  tags:
+    ignore: /.*/
+
+on-tag-main: &on-tag-main
+  branches:
+    ignore: /.*/
+  tags:
+    only: /.*/
+
+
+jobs:
+  dev-build:
+    machine:
+      image: << pipeline.parameters.machine-image >>
+    shell: /bin/bash -eo pipefail
+    steps:
+      - checkout
+      - run:
+          name: halt 
+          command: asdf
+
+workflows:
+  version: 2
+  dev-build:
+    jobs:
+      - dev-build:
+          filters: *on-push-main
