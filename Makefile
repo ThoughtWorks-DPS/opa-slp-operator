@@ -5,9 +5,9 @@
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
 # VERSION ?= 0.0.13
 ifndef CIRCLE_TAG
-	VERSION ?= $(CIRCLE_SHA1:0:7)
+	VERSION ?= ${CIRCLE_SHA1:0:7}
 else
-	VERSION ?= $(CIRCLE_TAG)
+	VERSION ?= ${CIRCLE_TAG}
 endif
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "candidate,fast,stable")
