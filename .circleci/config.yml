@@ -82,6 +82,8 @@ jobs:
         default: $DOCKER_PASSWORD
     steps:
       - checkout
+      - op/install-op:
+          os: Ubuntu
       - op/env:
           env-file: op.env
       - set-environment
