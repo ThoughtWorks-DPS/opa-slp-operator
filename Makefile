@@ -4,7 +4,7 @@
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
 # VERSION ?= 0.0.13
-ifndef CIRCLE_TAG
+ifndef ${CIRCLE_TAG}
 	VERSION ?= ${CIRCLE_SHA1:0:7}
 else
 	VERSION ?= ${CIRCLE_TAG}
