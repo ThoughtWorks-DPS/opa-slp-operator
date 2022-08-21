@@ -89,15 +89,11 @@ jobs:
       - set-environment
       - run:
           name: build dev version of operator
-          environment:
-            VERSION: $CIRCLE_SHA1:0:7
           command: |
             echo "docker build with tag ${VERSION}"
             make docker-build
       - run:
           name: push dev image to registry
-          environment:
-            VERSION: dev.${CIRCLE_SHA1:0:7}
           command: |
             echo echo "docker push tag ${VERSION}"
             make docker-push
