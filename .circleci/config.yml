@@ -91,12 +91,16 @@ jobs:
           name: build dev version of operator
           environment:
             VERSION: dev.${CIRCLE_SHA1:0:7}
-          command: make docker-build
+          command: |
+            echo "docker build with tag ${CIRCLE_SHA1:0:7}"
+            make docker-build
       - run:
           name: push dev image to registry
           environment:
             VERSION: dev.${CIRCLE_SHA1:0:7}
-          command: make docker-push
+          command: |
+            echo echo "docker push tag ${CIRCLE_SHA1:0:7}"
+            make docker-push
       - run:
           name: halt
           command: asdf
