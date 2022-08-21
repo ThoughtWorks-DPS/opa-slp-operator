@@ -90,12 +90,10 @@ jobs:
       - run:
           name: build dev version of operator
           command: |
-            echo "docker build with tag ${VERSION}"
             make docker-build
       - run:
           name: push dev image to registry
           command: |
-            echo echo "docker push tag ${VERSION}"
             make docker-push
 
 workflows:
