@@ -65,6 +65,13 @@ jobs:
     machine:
       image: << pipeline.parameters.machine-image >>
     shell: /bin/bash -eo pipefail
+    parameters:
+      registry-login:
+        type: string
+        default: $DOCKER_LOGIN
+      registry-password:
+        type: string
+        default: $DOCKER_PASSWORD
     steps:
       - checkout
       - op/env:
