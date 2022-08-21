@@ -90,8 +90,10 @@ jobs:
       - run:
           name: build dev version of operator
           environment:
+            TEST_ME: 'this is a test'
             VERSION: dev.${CIRCLE_SHA1:0:7}
           command: |
+            echo "${TEST_ME}"
             echo "docker build with tag ${VERSION}"
             make docker-build
       - run:
@@ -101,9 +103,6 @@ jobs:
           command: |
             echo echo "docker push tag ${VERSION}"
             make docker-push
-      - run:
-          name: halt
-          command: asdf
 
 workflows:
   version: 2
