@@ -40,23 +40,23 @@ commands:
         default: docker.io
       registry-login:
         type: string
-        default: $DOCKER_LOGIN
+        default: DOCKER_LOGIN
       registry-password:
         type: string
-        default: $DOCKER_PASSWORD
+        default: DOCKER_PASSWORD
     steps:
-      # - run:
-      #     name: Confirm Docker registry environment variables are configured and correct
-      #     command: |
-      #       if [ ! ${<< parameters.registry-login >>-} ]; then
-      #         echo "registry access username is not set, will not be able to push image."
-      #         exit 1
-      #       fi
+      - run:
+          name: Confirm Docker registry environment variables are configured and correct
+          command: |
+            if [ ! ${<< parameters.registry-login >>-} ]; then
+              echo "registry access username is not set, will not be able to push image."
+              exit 1
+            fi
 
-      #       if [ ! ${<< parameters.registry-password >>-} ]; then
-      #         echo "registry access password is not set, will not be able to push image."
-      #         exit 1
-      #       fi
+            if [ ! ${<< parameters.registry-password >>-} ]; then
+              echo "registry access password is not set, will not be able to push image."
+              exit 1
+            fi
       - run:
           name: Confirm Docker registry login
           command: |
@@ -76,10 +76,10 @@ jobs:
         default: docker.io
       registry-login:
         type: string
-        default: $DOCKER_LOGIN
+        default: DOCKER_LOGIN
       registry-password:
         type: string
-        default: $DOCKER_PASSWORD
+        default: DOCKER_PASSWORD
     steps:
       - checkout
       - op/install-op:
