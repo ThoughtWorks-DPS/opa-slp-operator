@@ -92,14 +92,14 @@ jobs:
           environment:
             VERSION: dev.${CIRCLE_SHA1:0:7}
           command: |
-            echo "docker build with tag ${CIRCLE_SHA1:0:7}"
+            echo "docker build with tag ${VERSION}"
             make docker-build
       - run:
           name: push dev image to registry
           environment:
             VERSION: dev.${CIRCLE_SHA1:0:7}
           command: |
-            echo echo "docker push tag ${CIRCLE_SHA1:0:7}"
+            echo echo "docker push tag ${VERSION}"
             make docker-push
       - run:
           name: halt
