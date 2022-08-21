@@ -3,6 +3,7 @@ version: 2.1
 
 orbs:
   op: twdps/onepassword@1.0.0
+  cosign: twdps/cosign@0.1.0
 
 parameters:
   context:
@@ -30,6 +31,34 @@ on-tag-main: &on-tag-main
   tags:
     only: /.*/
 
+commands:
+  set-environment:
+    parameters:
+      registry-login:
+        type: string
+        default: $DOCKER_LOGIN
+      registry-password:
+        type: string
+        default: $DOCKER_PASSWORD
+    steps:
+      - run:
+          name: Confirm Docker registry environment variables are configured and correct
+          command: |
+            if [ ! ${<< parameters.registry-login >>-} ]; then
+              echo "registry access username is not set, will not be able to push image."
+              exit 1
+            fi
+
+            if [ ! ${<< parameters.registry-password >>-} ]; then
+              echo "registry access password is not set, will not be able to push image."
+              exit 1
+            fi
+      - run:
+          name: Confirm Docker registry login
+          command: |
+            echo 'write to .docker/config.json is secure in ephemeral runtime environment'
+            echo ${<< parameters.registry-password >>} | docker login -u ${<< parameters.registry-login >>} --password-stdin << parameters.registry >>
+
 
 jobs:
   dev-build:
@@ -38,8 +67,21 @@ jobs:
     shell: /bin/bash -eo pipefail
     steps:
       - checkout
+      - op/env:
+          env-file: op.env
+      - set-environment
       - run:
-          name: halt 
+          name: build dev version of operator
+          environment:
+            VERSION: dev.${CIRCLE_SHA1:0:7}
+          command: make docker-build
+      - run:
+          name: push dev image to registry
+          environment:
+            VERSION: dev.${CIRCLE_SHA1:0:7}
+          command: make docker-push
+      - run:
+          name: halt
           command: asdf
 
 workflows:
@@ -47,4 +89,5 @@ workflows:
   dev-build:
     jobs:
       - dev-build:
+          context: << pipeline.parameters.context >>
           filters: *on-push-main
