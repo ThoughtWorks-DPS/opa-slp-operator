@@ -52,10 +52,12 @@ commands:
           env-file: op.env
       - kube/packages:
           kubectl-version: 1.24.4
-          bats-version: 1.7.0
       - run:
           name: install kind
           command: go install sigs.k8s.io/kind@v0.14.0
+      - run:
+          name: install bats
+          command: npm install -g bats@1.7.0
       - run:
           name: Confirm Docker registry environment variables are configured and correct
           command: |
