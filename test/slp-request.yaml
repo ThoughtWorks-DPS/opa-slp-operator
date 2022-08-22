@@ -1,0 +1,9 @@
+apiVersion: opa.twdps.io/v1alpha1
+kind: SlpDeployment
+metadata:
+  name: ci-dev-slp
+  namespace: ci-dev
+spec:
+  tenant: thoughtworks
+  systemId: cb21c7bccb654a4bbe5e537ecd3ef26e
+  namespace: ci-dev

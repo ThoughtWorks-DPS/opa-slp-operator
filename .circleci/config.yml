@@ -4,6 +4,7 @@ version: 2.1
 orbs:
   op: twdps/onepassword@1.0.0
   cosign: twdps/cosign@0.1.0
+  kube: twdps/kube-ops@0.2.0
 
 parameters:
   context:
@@ -45,6 +46,15 @@ commands:
         type: string
         default: DOCKER_PASSWORD
     steps:
+      - op/install-op:
+          os: Ubuntu
+      - op/env:
+          env-file: op.env
+      - kube/packages:
+          kubectl-version: 1.24.4
+      - run:
+          name: install kind
+          command: go install sigs.k8s.io/kind@v0.14.0
       - run:
           name: Confirm Docker registry environment variables are configured and correct
           command: |
@@ -63,6 +73,86 @@ commands:
             echo 'write to .docker/config.json is secure in ephemeral runtime environment'
             echo ${<< parameters.registry-password >>} | docker login -u ${<< parameters.registry-login >>} --password-stdin << parameters.registry >>
 
+  integration-test:
+    steps:
+      - run:
+          name: launch ci local cluster
+          command: |
+            kind create cluster --name test
+            WAIT_FOR_CLUSTER=0
+            while [  $WAIT_FOR_CLUSTER -lt 10 ]; do
+              echo "check cluster status"
+              STATUS=$(kubectl get nodes | grep "Ready")
+              if [[ $STATUS ]]; then
+                echo "test cluster ready"
+                break
+              fi
+              sleep 5
+              echo "wait 5 seconds..."
+              let WAIT_FOR_CLUSTER=WAIT_FOR_CLUSTER+1
+              if [[ $WAIT_FOR_CLUSTER -gt 10 ]]; then
+                echo "timeout error waiting for test cluster to become ready"
+                exit 1
+              fi
+            done
+      - run:
+          name: populate credential secret template
+          command: op inject -i test/slp-das-credentials.yaml.tpl -o slp-das-credentials.yaml
+      - run:
+          name: deploy dev build operator
+          command: |
+            make deploy
+            WAIT_FOR_OPERATOR=0
+            while [  $WAIT_FOR_OPERATOR -lt 10 ]; do
+              echo "check operator health"
+              STATUS=$(kubectl get all -n opa-system | grep "2/2")
+              if [[ $STATUS ]]; then
+                echo "operator available"
+                break
+              fi
+              sleep 5
+              echo "wait 5 seconds..."
+              let WAIT_FOR_OPERATOR=WAIT_FOR_OPERATOR+1
+              if [[ $WAIT_FOR_OPERATOR -gt 10 ]]; then
+                echo "timeout error waiting for operator to become available"
+                exit 1
+              fi
+            done
+      - run:
+          name: deploy ci-dev namespace
+          command: kubectl apply -f test/ci-namespace.yaml
+      - run:
+          name: deploy ci slp-das credentials
+          command: kubectl apply -f slp-das-credentials.yaml
+      - run:
+          name: deploy slp resource requests
+          command: |
+            kubectl apply -f test/slp-request.yaml
+            while [  $WAIT_FOR_SLP -lt 10 ]; do
+              echo "check slp health"
+              STATUS=$(kubectl get all -n ci-dev | grep "Running")
+              if [[ $STATUS ]]; then
+                echo "slp available"
+                break
+              fi
+              sleep 5
+              echo "wait 5 seconds..."
+              let WAIT_FOR_SLP=WAIT_FOR_SLP+1
+              if [[ $WAIT_FOR_SLP -gt 10 ]]; then
+                echo "timeout error waiting for slp to become available"
+                exit 1
+              fi
+            done
+      - run:
+          name: verify slp health"
+          command: |
+            STATUS=$(kubectl logs pod/ci-dev-slp-0 -n ci-dev --tail=1 | grep "Start serving end-point")
+            if [[ $STATUS ]]; then
+              echo 'slp running and available'
+            else
+              echo 'slp unhealthy'
+              exit 1
+            fi
 
 jobs:
   dev-build:
@@ -82,10 +172,6 @@ jobs:
         default: DOCKER_PASSWORD
     steps:
       - checkout
-      - op/install-op:
-          os: Ubuntu
-      - op/env:
-          env-file: op.env
       - set-environment
       - run:
           name: build dev version of operator
@@ -95,6 +181,7 @@ jobs:
           name: push dev image to registry
           command: |
             make docker-push
+      - integration-test
 
 workflows:
   version: 2

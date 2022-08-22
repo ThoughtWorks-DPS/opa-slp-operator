@@ -9,7 +9,7 @@ metadata:
     system-type: istio
 type: Opaque
 stringData:
-  slp.yaml: |
+  das.yaml: |
     discovery:
       name: discovery
       prefix: /systems/{{ op://empc-lab/svc-styra/ci-test-fixture-systemid }}
