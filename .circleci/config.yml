@@ -103,17 +103,17 @@ commands:
       - run:
           name: deploy dev build operator
           command: |
-            make deploy
+            make deploy & sleep 10
             WAIT_FOR_OPERATOR=0
             while [  $WAIT_FOR_OPERATOR -lt 10 ]; do
-              sleep 5
-              echo "wait 5 seconds..."
               echo "check operator health"
               STATUS=$(kubectl get all -n opa-system | grep "2/2")
               if [[ $STATUS ]]; then
                 echo "operator available"
                 break
               fi
+              sleep 5
+              echo "wait 5 seconds..."
               let WAIT_FOR_OPERATOR=WAIT_FOR_OPERATOR+1
               if [[ $WAIT_FOR_OPERATOR -gt 10 ]]; then
                 echo "timeout error waiting for operator to become available"
