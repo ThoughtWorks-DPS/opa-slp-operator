@@ -96,8 +96,10 @@ commands:
               fi
             done
       - run:
-          name: populate credential secret template
-          command: op inject -i test/slp-das-credentials.yaml.tpl -o slp-das-credentials.yaml
+          name: populate credential secret and resource request templates
+          command: |
+            op inject -i test/slp-das-credentials.yaml.tpl -o slp-das-credentials.yaml
+            op inject -i test/slp-request.yaml.tpl -o slp-request.yaml
       - run:
           name: deploy dev build operator
           command: |
@@ -127,7 +129,7 @@ commands:
       - run:
           name: deploy slp resource requests
           command: |
-            kubectl apply -f test/slp-request.yaml
+            kubectl apply -f slp-request.yaml
             while [  $WAIT_FOR_SLP -lt 10 ]; do
               echo "check slp health"
               STATUS=$(kubectl get all -n ci-dev | grep "Running")

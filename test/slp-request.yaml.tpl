@@ -5,5 +5,5 @@ metadata:
   namespace: ci-dev
 spec:
   tenant: thoughtworks
-  systemId: cb21c7bccb654a4bbe5e537ecd3ef26e
+  systemId: {{ op://empc-lab/svc-styra/ci-test-fixture-systemid }}
   namespace: ci-dev
