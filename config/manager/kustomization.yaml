@@ -13,4 +13,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: twdps/opa-slp-operator
-  newTag: 0.0.13
+  newTag: dev.

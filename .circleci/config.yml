@@ -52,6 +52,7 @@ commands:
           env-file: op.env
       - kube/packages:
           kubectl-version: 1.24.4
+          bats-version: 1.7.0
       - run:
           name: install kind
           command: go install sigs.k8s.io/kind@v0.14.0
@@ -77,24 +78,7 @@ commands:
     steps:
       - run:
           name: launch ci local cluster
-          command: |
-            kind create cluster --name test
-            WAIT_FOR_CLUSTER=0
-            while [  $WAIT_FOR_CLUSTER -lt 10 ]; do
-              echo "check cluster status"
-              STATUS1=$(kubectl get nodes | grep "Ready")
-              if [[ $STATUS1 ]]; then
-                echo "test cluster ready"
-                break
-              fi
-              sleep 5
-              echo "wait 5 seconds..."
-              let WAIT_FOR_CLUSTER=WAIT_FOR_CLUSTER+1
-              if [[ $WAIT_FOR_CLUSTER -gt 10 ]]; then
-                echo "timeout error waiting for test cluster to become ready"
-                exit 1
-              fi
-            done
+          command: kind create cluster --name test
       - run:
           name: populate credential secret and resource request templates
           command: |
@@ -104,22 +88,10 @@ commands:
           name: deploy dev build operator
           command: |
             make deploy
-            WAIT_FOR_OPERATOR=0
-            while [  $WAIT_FOR_OPERATOR -lt 10 ]; do
-              echo "check operator health"
-              STATUS2=$(kubectl get all -n opa-system | grep "2/2")
-              if [[ $STATUS2 ]]; then
-                echo "operator available"
-                break
-              fi
-              sleep 5
-              echo "wait 5 seconds..."
-              let WAIT_FOR_OPERATOR=WAIT_FOR_OPERATOR+1
-              if [[ $WAIT_FOR_OPERATOR -gt 10 ]]; then
-                echo "timeout error waiting for operator to become available"
-                exit 1
-              fi
-            done
+            sleep 25
+      - run:
+          name: smoke test operator
+          command: bats test/operator-smoketest.bats
       - run:
           name: deploy ci-dev namespace
           command: kubectl apply -f test/ci-namespace.yaml
@@ -130,31 +102,10 @@ commands:
           name: deploy slp resource requests
           command: |
             kubectl apply -f slp-request.yaml
-            while [  $WAIT_FOR_SLP -lt 10 ]; do
-              echo "check slp health"
-              STATUS3=$(kubectl get all -n ci-dev | grep "Running")
-              if [[ $STATUS3 ]]; then
-                echo "slp available"
-                break
-              fi
-              sleep 5
-              echo "wait 5 seconds..."
-              let WAIT_FOR_SLP=WAIT_FOR_SLP+1
-              if [[ $WAIT_FOR_SLP -gt 10 ]]; then
-                echo "timeout error waiting for slp to become available"
-                exit 1
-              fi
-            done
+            sleep 25
       - run:
-          name: verify slp health"
-          command: |
-            STATUS=$(kubectl logs pod/ci-dev-slp-0 -n ci-dev --tail=1 | grep "Start serving end-point")
-            if [[ $STATUS ]]; then
-              echo 'slp running and available'
-            else
-              echo 'slp unhealthy'
-              exit 1
-            fi
+          name: smoke test slp deployment
+          command: bats test/slp-smoketest.bats
 
 jobs:
   dev-build:
