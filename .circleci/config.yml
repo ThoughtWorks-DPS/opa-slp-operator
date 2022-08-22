@@ -82,8 +82,8 @@ commands:
             WAIT_FOR_CLUSTER=0
             while [  $WAIT_FOR_CLUSTER -lt 10 ]; do
               echo "check cluster status"
-              STATUS=$(kubectl get nodes | grep "Ready")
-              if [[ $STATUS ]]; then
+              STATUS1=$(kubectl get nodes | grep "Ready")
+              if [[ $STATUS1 ]]; then
                 echo "test cluster ready"
                 break
               fi
@@ -103,12 +103,12 @@ commands:
       - run:
           name: deploy dev build operator
           command: |
-            make deploy & sleep 10
+            make deploy
             WAIT_FOR_OPERATOR=0
             while [  $WAIT_FOR_OPERATOR -lt 10 ]; do
               echo "check operator health"
-              STATUS=$(kubectl get all -n opa-system | grep "2/2")
-              if [[ $STATUS ]]; then
+              STATUS2=$(kubectl get all -n opa-system | grep "2/2")
+              if [[ $STATUS2 ]]; then
                 echo "operator available"
                 break
               fi
@@ -132,8 +132,8 @@ commands:
             kubectl apply -f slp-request.yaml
             while [  $WAIT_FOR_SLP -lt 10 ]; do
               echo "check slp health"
-              STATUS=$(kubectl get all -n ci-dev | grep "Running")
-              if [[ $STATUS ]]; then
+              STATUS3=$(kubectl get all -n ci-dev | grep "Running")
+              if [[ $STATUS3 ]]; then
                 echo "slp available"
                 break
               fi
