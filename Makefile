@@ -1,14 +1,15 @@
-$(info    CIRCLE_SHA1 is $(CIRCLE_SHA1))
-prefix ?= $(shell echo $(CIRCLE_SHA1) | head -c 8)
-$(info    prefix is $(prefix))
 
 # VERSION defines the project version for the bundle.
 # Update this value when you upgrade the version of your project.
 # To re-generate a bundle for another specific version without changing the standard setup, you can:
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
-VERSION ?= $(CIRCLE_SHA1:0:7)
-
+#VERSION ?= 0.0.0
+ifdef $(CIRCLE_TAG)
+VERSION ?= $(CIRCLE_TAG)
+else
+VERSION ?= dev.$(shell echo $(CIRCLE_SHA1) | head -c 8)
+endif
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "candidate,fast,stable")
 # To re-generate a bundle for other specific channels without changing the standard setup, you can:
