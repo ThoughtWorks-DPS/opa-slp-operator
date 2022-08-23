@@ -115,8 +115,8 @@ jobs:
       - kube/packages:
           use-sudo: false
           # argocd-version: latest
-          awspec-version: latest
-          # bats-version: latest
+          # awspec-version: latest
+          bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -133,8 +133,8 @@ jobs:
       - kube/packages:
           use-sudo: false
           # argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          # bats-version: 1.7.0
+          # awspec-version: 1.28.0
+          bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
@@ -151,8 +151,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          awspec-version: latest
-          # bats-version: latest
+          # awspec-version: latest
+          bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -169,8 +169,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          # bats-version: 1.7.0
+          # awspec-version: 1.28.0
+          bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
@@ -187,8 +187,8 @@ jobs:
       - kube/packages:
           use-sudo: false
           # argocd-version: latest
-          awspec-version: latest
-          # bats-version: latest
+          # awspec-version: latest
+          bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -205,8 +205,8 @@ jobs:
       - kube/packages:
           use-sudo: false
           # argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          # bats-version: 1.7.0
+          # awspec-version: 1.28.0
+          bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
@@ -223,8 +223,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          awspec-version: latest
-          # bats-version: latest
+          # awspec-version: latest
+          bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -241,8 +241,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          # bats-version: 1.7.0
+          # awspec-version: 1.28.0
+          bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
@@ -259,7 +259,7 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          # bats-version: latest
+          bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -267,9 +267,12 @@ jobs:
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
-      - kube/packages:
-          use-sudo: false
-          awspec-version: latest
+      # - run:
+      #     name: install nokogiri as awspec dependency
+      #     command: gem install nokogiri
+      # - kube/packages:
+      #     use-sudo: false
+      #     awspec-version: latest
 
   ubuntu-machine-versions:
     machine:
@@ -279,7 +282,7 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          # bats-version: 1.7.0
+          bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
@@ -287,9 +290,12 @@ jobs:
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
-      - kube/packages:
-          use-sudo: false
-          awspec-version: latest
+      # - run:
+      #     name: install nokogiri as awspec dependency
+      #     command: gem install nokogiri
+      # - kube/packages:
+      #     use-sudo: false
+      #     awspec-version: latest
 
 workflows:
   version: 2
@@ -325,4 +331,3 @@ workflows:
       - ubuntu-machine-versions:
           context: << pipeline.parameters.context >>
           filters: *on-push-main
-          
