@@ -114,6 +114,7 @@ jobs:
     steps:
       - alpine-no-sudo-prep
       - kube/packages:
+          use-sudo: false
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
@@ -122,6 +123,7 @@ jobs:
           # inspec-version: latest
           # istioctl-version: latest
           kubectl-version: latest
+          
           # sonobuoy-version: latest
           # terraform-version: latest
 
@@ -131,6 +133,7 @@ jobs:
     steps:
       - alpine-no-sudo-prep
       - kube/packages:
+          use-sudo: false
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
@@ -148,6 +151,7 @@ jobs:
     steps:
       - alpine-sudo-prep
       - kube/packages:
+          use-sudo: true
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
@@ -165,6 +169,7 @@ jobs:
     steps:
       - alpine-sudo-prep
       - kube/packages:
+          use-sudo: true
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
@@ -182,6 +187,7 @@ jobs:
     steps:
       - slim-no-sudo-prep
       - kube/packages:
+          use-sudo: false
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
@@ -199,6 +205,7 @@ jobs:
     steps:
       - slim-no-sudo-prep
       - kube/packages:
+          use-sudo: false
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
@@ -216,6 +223,7 @@ jobs:
     steps:
       - slim-sudo-prep
       - kube/packages:
+          use-sudo: true
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
@@ -233,6 +241,7 @@ jobs:
     steps:
       - slim-sudo-prep
       - kube/packages:
+          use-sudo: true
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
