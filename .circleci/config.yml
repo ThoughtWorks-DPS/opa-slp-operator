@@ -106,7 +106,6 @@ commands:
             sudo apt-get install --no-install-recommends -y nodejs npm 
 
 # go install sigs.k8s.io/kind@v0.14.0
-
 jobs:
   alpine-no-sudo-latest:
     docker:
