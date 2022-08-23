@@ -114,15 +114,14 @@ jobs:
       - alpine-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          # argocd-version: latest
+          argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
-          kubectl-version: latest
-          
+          # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
 
@@ -133,14 +132,14 @@ jobs:
       - alpine-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          # argocd-version: 2.4.10
+          argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
-          kubectl-version: 1.24.3
+          # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
 
@@ -151,14 +150,14 @@ jobs:
       - alpine-sudo-prep
       - kube/packages:
           use-sudo: true
-          # argocd-version: latest
+          argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
-          kubectl-version: latest
+          # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
 
@@ -169,14 +168,14 @@ jobs:
       - alpine-sudo-prep
       - kube/packages:
           use-sudo: true
-          # argocd-version: 2.4.10
+          argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
-          kubectl-version: 1.24.3
+          # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
 
@@ -187,14 +186,14 @@ jobs:
       - slim-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          # argocd-version: latest
+          argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
-          kubectl-version: latest
+          # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
 
@@ -205,14 +204,14 @@ jobs:
       - slim-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          # argocd-version: 2.4.10
+          argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
-          kubectl-version: 1.24.3
+          # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
 
