@@ -259,7 +259,7 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          bats-version: latest
+          # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
@@ -270,9 +270,10 @@ jobs:
       # - run:
       #     name: install nokogiri as awspec dependency
       #     command: gem install nokogiri
-      # - kube/packages:
-      #     use-sudo: false
-      #     awspec-version: latest
+      - kube/packages:
+          use-sudo: false
+          # awspec-version: latest
+          bats-version: latest
 
   ubuntu-machine-versions:
     machine:
