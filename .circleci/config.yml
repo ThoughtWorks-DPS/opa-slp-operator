@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  kube: twdps/kube-ops@0.2.0
+  kube: twdps/kube-ops@dev:latest
 
 parameters:
   context:
@@ -22,7 +22,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apk add --no-cache curl 
+            apk add --no-cache curl bash
 
             echo 'install ruby'
             apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
@@ -45,7 +45,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apk add --no-cache curl 
+            sudo apk add --no-cache curl
             
             echo 'install ruby'
             sudo apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
@@ -68,7 +68,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apt-get update && apt-get install --no-install-recommends -y curl
+            apt-get update && apt-get install --no-install-recommends -y curl bash
 
             echo 'install ruby'
             apt-get install --no-install-recommends -y ruby-full 
@@ -114,16 +114,16 @@ jobs:
     steps:
       - alpine-no-sudo-prep
       - kube/packages:
-          argocd-version: latest
-          awspec-version: latest
-          bats-version: latest
-          datadog-version: latest
-          helm-version: latest 
-          inspec-version: latest
-          istioctl-version: latest
+          # argocd-version: latest
+          # awspec-version: latest
+          # bats-version: latest
+          # datadog-version: latest
+          # helm-version: latest 
+          # inspec-version: latest
+          # istioctl-version: latest
           kubectl-version: latest
-          sonobuoy-version: latest
-          terraform-version: latest
+          # sonobuoy-version: latest
+          # terraform-version: latest
 
   alpine-no-sudo-versions:
     docker:
@@ -131,16 +131,16 @@ jobs:
     steps:
       - alpine-no-sudo-prep
       - kube/packages:
-          argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          bats-version: 1.7.0
-          datadog-version: 0.44.0
-          helm-version: 3.9.3
-          inspec-version: 5.18.14
-          istioctl-version: 1.14.3
+          # argocd-version: 2.4.10
+          # awspec-version: 1.28.0
+          # bats-version: 1.7.0
+          # datadog-version: 0.44.0
+          # helm-version: 3.9.3
+          # inspec-version: 5.18.14
+          # istioctl-version: 1.14.3
           kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          # terraform-version: 1.2.7
 
   alpine-sudo-latest:
     docker:
@@ -148,16 +148,16 @@ jobs:
     steps:
       - alpine-sudo-prep
       - kube/packages:
-          argocd-version: latest
-          awspec-version: latest
-          bats-version: latest
-          datadog-version: latest
-          helm-version: latest 
-          inspec-version: latest
-          istioctl-version: latest
+          # argocd-version: latest
+          # awspec-version: latest
+          # bats-version: latest
+          # datadog-version: latest
+          # helm-version: latest 
+          # inspec-version: latest
+          # istioctl-version: latest
           kubectl-version: latest
-          sonobuoy-version: latest
-          terraform-version: latest
+          # sonobuoy-version: latest
+          # terraform-version: latest
 
   alpine-sudo-versions:
     docker:
@@ -165,16 +165,16 @@ jobs:
     steps:
       - alpine-sudo-prep
       - kube/packages:
-          argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          bats-version: 1.7.0
-          datadog-version: 0.44.0
-          helm-version: 3.9.3
-          inspec-version: 5.18.14
-          istioctl-version: 1.14.3
+          # argocd-version: 2.4.10
+          # awspec-version: 1.28.0
+          # bats-version: 1.7.0
+          # datadog-version: 0.44.0
+          # helm-version: 3.9.3
+          # inspec-version: 5.18.14
+          # istioctl-version: 1.14.3
           kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          # terraform-version: 1.2.7
 
   slim-no-sudo-latest:
     docker:
@@ -182,16 +182,16 @@ jobs:
     steps:
       - slim-no-sudo-prep
       - kube/packages:
-          argocd-version: latest
-          awspec-version: latest
-          bats-version: latest
-          datadog-version: latest
-          helm-version: latest 
-          inspec-version: latest
-          istioctl-version: latest
+          # argocd-version: latest
+          # awspec-version: latest
+          # bats-version: latest
+          # datadog-version: latest
+          # helm-version: latest 
+          # inspec-version: latest
+          # istioctl-version: latest
           kubectl-version: latest
-          sonobuoy-version: latest
-          terraform-version: latest
+          # sonobuoy-version: latest
+          # terraform-version: latest
 
   slim-no-sudo-versions:
     docker:
@@ -199,16 +199,16 @@ jobs:
     steps:
       - slim-no-sudo-prep
       - kube/packages:
-          argocd-version: 2.4.10
-          awspec-version: 1.28.0
-          bats-version: 1.7.0
-          datadog-version: 0.44.0
-          helm-version: 3.9.3
-          inspec-version: 5.18.14
-          istioctl-version: 1.14.3
+          # argocd-version: 2.4.10
+          # awspec-version: 1.28.0
+          # bats-version: 1.7.0
+          # datadog-version: 0.44.0
+          # helm-version: 3.9.3
+          # inspec-version: 5.18.14
+          # istioctl-version: 1.14.3
           kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          # terraform-version: 1.2.7
 
   slim-sudo-latest:
     docker:
