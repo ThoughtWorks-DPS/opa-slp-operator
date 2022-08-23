@@ -116,8 +116,8 @@ jobs:
           use-sudo: false
           # argocd-version: latest
           # awspec-version: latest
-          bats-version: latest
-          # datadog-version: latest
+          # bats-version: latest
+          datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
@@ -134,8 +134,8 @@ jobs:
           use-sudo: false
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
-          bats-version: 1.7.0
-          # datadog-version: 0.44.0
+          # bats-version: 1.7.0
+          datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
@@ -152,8 +152,8 @@ jobs:
           use-sudo: true
           # argocd-version: latest
           # awspec-version: latest
-          bats-version: latest
-          # datadog-version: latest
+          # bats-version: latest
+          datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
@@ -170,8 +170,8 @@ jobs:
           use-sudo: true
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
-          bats-version: 1.7.0
-          # datadog-version: 0.44.0
+          # bats-version: 1.7.0
+          datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
@@ -188,8 +188,8 @@ jobs:
           use-sudo: false
           # argocd-version: latest
           # awspec-version: latest
-          bats-version: latest
-          # datadog-version: latest
+          # bats-version: latest
+          datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
@@ -206,8 +206,8 @@ jobs:
           use-sudo: false
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
-          bats-version: 1.7.0
-          # datadog-version: 0.44.0
+          # bats-version: 1.7.0
+          datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
@@ -224,8 +224,8 @@ jobs:
           use-sudo: true
           # argocd-version: latest
           # awspec-version: latest
-          bats-version: latest
-          # datadog-version: latest
+          # bats-version: latest
+          datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
@@ -242,8 +242,8 @@ jobs:
           use-sudo: true
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
-          bats-version: 1.7.0
-          # datadog-version: 0.44.0
+          # bats-version: 1.7.0
+          datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
@@ -259,8 +259,7 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          # bats-version: latest
-          # datadog-version: latest
+          datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
@@ -273,7 +272,7 @@ jobs:
       - kube/packages:
           use-sudo: false
           # awspec-version: latest
-          bats-version: latest
+          # bats-version: latest
 
   ubuntu-machine-versions:
     machine:
@@ -283,8 +282,7 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          bats-version: 1.7.0
-          # datadog-version: 0.44.0
+          datadog-version: 0.44.0
           # helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
@@ -296,7 +294,8 @@ jobs:
       #     command: gem install nokogiri
       # - kube/packages:
       #     use-sudo: false
-      #     awspec-version: latest
+      #     awspec-version: 1.28.0
+      #     bats-version: 1.7.0
 
 workflows:
   version: 2
