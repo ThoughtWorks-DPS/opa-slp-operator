@@ -259,7 +259,6 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -268,6 +267,9 @@ jobs:
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
+      - kube/packages:
+          use-sudo: false
+          awspec-version: latest
 
   ubuntu-machine-versions:
     machine:
@@ -277,7 +279,6 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
@@ -286,6 +287,9 @@ jobs:
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
+      - kube/packages:
+          use-sudo: false
+          awspec-version: latest
 
 workflows:
   version: 2
