@@ -114,8 +114,8 @@ jobs:
       - alpine-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          argocd-version: latest
-          # awspec-version: latest
+          # argocd-version: latest
+          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -132,8 +132,8 @@ jobs:
       - alpine-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          argocd-version: 2.4.10
-          # awspec-version: 1.28.0
+          # argocd-version: 2.4.10
+          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
@@ -150,8 +150,8 @@ jobs:
       - alpine-sudo-prep
       - kube/packages:
           use-sudo: true
-          argocd-version: latest
-          # awspec-version: latest
+          # argocd-version: latest
+          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -168,8 +168,8 @@ jobs:
       - alpine-sudo-prep
       - kube/packages:
           use-sudo: true
-          argocd-version: 2.4.10
-          # awspec-version: 1.28.0
+          # argocd-version: 2.4.10
+          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
@@ -186,8 +186,8 @@ jobs:
       - slim-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          argocd-version: latest
-          # awspec-version: latest
+          # argocd-version: latest
+          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -204,8 +204,8 @@ jobs:
       - slim-no-sudo-prep
       - kube/packages:
           use-sudo: false
-          argocd-version: 2.4.10
-          # awspec-version: 1.28.0
+          # argocd-version: 2.4.10
+          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
@@ -222,8 +222,8 @@ jobs:
       - slim-sudo-prep
       - kube/packages:
           use-sudo: true
-          argocd-version: latest
-          # awspec-version: latest
+          # argocd-version: latest
+          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -240,8 +240,8 @@ jobs:
       - slim-sudo-prep
       - kube/packages:
           use-sudo: true
-          argocd-version: 2.4.10
-          # awspec-version: 1.28.0
+          # argocd-version: 2.4.10
+          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
@@ -258,8 +258,8 @@ jobs:
     steps:
       - kube/packages:
           use-sudo: true
-          argocd-version: latest
-          # awspec-version: latest
+          # argocd-version: latest
+          awspec-version: latest
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
@@ -276,8 +276,8 @@ jobs:
     steps:
       - kube/packages:
           use-sudo: true
-          argocd-version: 2.4.10
-          # awspec-version: 1.28.0
+          # argocd-version: 2.4.10
+          awspec-version: 1.28.0
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
