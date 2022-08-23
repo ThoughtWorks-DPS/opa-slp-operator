@@ -258,6 +258,7 @@ jobs:
     shell: /bin/bash -eo pipefail
     steps:
       - kube/packages:
+          use-sudo: true
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
@@ -275,6 +276,7 @@ jobs:
     shell: /bin/bash -eo pipefail
     steps:
       - kube/packages:
+          use-sudo: true
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
