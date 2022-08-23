@@ -22,6 +22,8 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
+            apk add --no-cache curl 
+
             echo 'install ruby'
             apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
 
@@ -31,9 +33,9 @@ commands:
             rm -r /usr/lib/python*/ensurepip
             pip3 install --upgrade pip
             if [ ! -e /usr/bin/pip ]; then ln -s /usr/bin/pip3 /usr/bin/pip ; fi
-            ln -s /usr/bin/pydoc3 /usr/bin/pydoc
-            ln -s /usr/bin/python3 /usr/bin/python
-            ln -s /usr/bin/python3-config /usr/bin/python-config
+            ln -s -f /usr/bin/pydoc3 /usr/bin/pydoc
+            ln -s -f /usr/bin/python3 /usr/bin/python
+            ln -s -f /usr/bin/python3-config /usr/bin/python-config
 
             echo 'install nodejs/npm'
             apk add --no-cache nodejs npm 
@@ -43,6 +45,8 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
+            sudo apk add --no-cache curl 
+            
             echo 'install ruby'
             sudo apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
 
@@ -52,9 +56,9 @@ commands:
             sudo rm -r /usr/lib/python*/ensurepip
             sudo pip3 install --upgrade pip
             if [ ! -e /usr/bin/pip ]; then sudo ln -s /usr/bin/pip3 /usr/bin/pip ; fi
-            sudo ln -s /usr/bin/pydoc3 /usr/bin/pydoc
-            sudo ln -s /usr/bin/python3 /usr/bin/python
-            sudo ln -s /usr/bin/python3-config /usr/bin/python-config
+            sudo ln -s -f /usr/bin/pydoc3 /usr/bin/pydoc
+            sudo ln -s -f /usr/bin/python3 /usr/bin/python
+            sudo ln -s -f /usr/bin/python3-config /usr/bin/python-config
 
             echo 'install nodejs/npm'
             sudo apk add --no-cache nodejs npm 
@@ -64,16 +68,17 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apt-get update
+            apt-get update && apt-get install --no-install-recommends -y curl
+
             echo 'install ruby'
             apt-get install --no-install-recommends -y ruby-full 
 
             echo 'install python'
             apt-get install --no-install-recommends -y python3-dev python3-pip python3-venv
             ln -f -s /usr/bin/pip3 /usr/bin/pip
-            ln -s /usr/bin/pydoc3 /usr/bin/pydoc
-            ln -s /usr/bin/python3 /usr/bin/python
-            ln -s /usr/bin/python3-config /usr/bin/python-config
+            ln -s -f /usr/bin/pydoc3 /usr/bin/pydoc
+            ln -s -f /usr/bin/python3 /usr/bin/python
+            ln -s -f /usr/bin/python3-config /usr/bin/python-config
 
             echo 'install nodejs/npm'
             bash -c "curl -sL https://deb.nodesource.com/setup_16.x | bash - "
@@ -84,16 +89,17 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apt-get update
+            sudo apt-get update && sudo apt-get install --no-install-recommends -y curl
+
             echo 'install ruby'
             sudo apt-get install --no-install-recommends -y ruby-full 
 
             echo 'install python'
             sudo apt-get install --no-install-recommends -y python3-dev python3-pip python3-venv
             sudo ln -f -s /usr/bin/pip3 /usr/bin/pip
-            sudo ln -s /usr/bin/pydoc3 /usr/bin/pydoc
-            sudo ln -s /usr/bin/python3 /usr/bin/python
-            sudo ln -s /usr/bin/python3-config /usr/bin/python-config
+            sudo ln -s -f /usr/bin/pydoc3 /usr/bin/pydoc
+            sudo ln -s -f /usr/bin/python3 /usr/bin/python
+            sudo ln -s -f /usr/bin/python3-config /usr/bin/python-config
 
             echo 'install nodejs/npm'
             sudo bash -c "curl -sL https://deb.nodesource.com/setup_16.x | bash - "
