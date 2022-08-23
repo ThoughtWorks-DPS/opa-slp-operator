@@ -117,8 +117,8 @@ jobs:
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
-          datadog-version: latest
-          # helm-version: latest 
+          # datadog-version: latest
+          helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
@@ -135,8 +135,8 @@ jobs:
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          datadog-version: 0.44.0
-          # helm-version: 3.9.3
+          # datadog-version: 0.44.0
+          helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
@@ -153,8 +153,8 @@ jobs:
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
-          datadog-version: latest
-          # helm-version: latest 
+          # datadog-version: latest
+          helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
@@ -171,8 +171,8 @@ jobs:
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          datadog-version: 0.44.0
-          # helm-version: 3.9.3
+          # datadog-version: 0.44.0
+          helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
@@ -189,8 +189,8 @@ jobs:
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
-          datadog-version: latest
-          # helm-version: latest 
+          # datadog-version: latest
+          helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
@@ -207,8 +207,8 @@ jobs:
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          datadog-version: 0.44.0
-          # helm-version: 3.9.3
+          # datadog-version: 0.44.0
+          helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
@@ -225,8 +225,8 @@ jobs:
           # argocd-version: latest
           # awspec-version: latest
           # bats-version: latest
-          datadog-version: latest
-          # helm-version: latest 
+          # datadog-version: latest
+          helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
           #  kubectl-version: latest
@@ -243,8 +243,8 @@ jobs:
           # argocd-version: 2.4.10
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          datadog-version: 0.44.0
-          # helm-version: 3.9.3
+          # datadog-version: 0.44.0
+          helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
@@ -259,8 +259,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: latest
-          datadog-version: latest
-          # helm-version: latest 
+          # datadog-version: latest
+          helm-version: latest 
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
@@ -282,8 +282,8 @@ jobs:
       - kube/packages:
           use-sudo: true
           # argocd-version: 2.4.10
-          datadog-version: 0.44.0
-          # helm-version: 3.9.3
+          # datadog-version: 0.44.0
+          helm-version: 3.9.3
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
