@@ -22,10 +22,10 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apk add --no-cache curl bash
+            apk add --no-cache curl bash build-base gcc g++ make
 
             echo 'install ruby'
-            apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
+            apk add --no-cache ruby ruby-dev ruby-webrick ruby-bundler
 
             echo 'install python'
             apk add --no-cache python3 python3-dev libffi-dev
@@ -45,10 +45,10 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apk add --no-cache curl
+            sudo apk add --no-cache curl bash build-base gcc g++ make
             
             echo 'install ruby'
-            sudo apk add --no-cache build-base ruby ruby-dev ruby-webrick ruby-bundler
+            sudo apk add --no-cache ruby ruby-dev ruby-webrick ruby-bundler
 
             echo 'install python'
             sudo apk add --no-cache python3 python3-dev libffi-dev
@@ -68,7 +68,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apt-get update && apt-get install --no-install-recommends -y curl bash
+            apt-get update && apt-get install --no-install-recommends -y curl bash gcc g++ make
 
             echo 'install ruby'
             apt-get install --no-install-recommends -y ruby-full 
@@ -89,7 +89,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apt-get update && sudo apt-get install --no-install-recommends -y curl
+            sudo apt-get update && sudo apt-get install --no-install-recommends -y curl bash gcc g++ make
 
             echo 'install ruby'
             sudo apt-get install --no-install-recommends -y ruby-full 
@@ -260,7 +260,8 @@ jobs:
           use-sudo: true
           # argocd-version: latest
           # datadog-version: latest
-          # inspec-version: latest
+          # helm-version: latest 
+          # 
           # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
@@ -272,7 +273,7 @@ jobs:
           use-sudo: false
           # awspec-version: latest
           # bats-version: latest
-          helm-version: latest 
+          # inspec-version: latest
 
   ubuntu-machine-versions:
     machine:
@@ -283,7 +284,7 @@ jobs:
           use-sudo: true
           # argocd-version: 2.4.10
           # datadog-version: 0.44.0
-          # inspec-version: 5.18.14
+          # helm-version: 3.9.3
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
@@ -295,7 +296,7 @@ jobs:
           use-sudo: false
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          helm-version: 3.9.3
+          inspec-version: 5.18.14
 
 workflows:
   version: 2
