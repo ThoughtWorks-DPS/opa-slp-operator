@@ -148,6 +148,7 @@ jobs:
       image: << pipeline.parameters.machine-image >>
     shell: /bin/bash -eo pipefail
     steps:
+      - set-environment
       - cosign/install
       - run:
           name: fetch signing keys
