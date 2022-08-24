@@ -168,7 +168,7 @@ jobs:
           tag: ${CIRCLE_TAG}
       - run:
           name: push releaes version
-          command: make docker-push
+          command: make docker-push-tag
 
 workflows:
   version: 2
