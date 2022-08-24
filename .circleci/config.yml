@@ -122,8 +122,8 @@ jobs:
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
-          sonobuoy-version: latest
-          # terraform-version: latest
+          # sonobuoy-version: latest
+          terraform-version: latest
 
   alpine-no-sudo-versions:
     docker:
@@ -140,8 +140,8 @@ jobs:
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          # terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          terraform-version: 1.2.7
 
   alpine-sudo-latest:
     docker:
@@ -158,8 +158,8 @@ jobs:
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
-          sonobuoy-version: latest
-          # terraform-version: latest
+          # sonobuoy-version: latest
+          terraform-version: latest
 
   alpine-sudo-versions:
     docker:
@@ -176,8 +176,8 @@ jobs:
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          # terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          terraform-version: 1.2.7
 
   slim-no-sudo-latest:
     docker:
@@ -194,8 +194,8 @@ jobs:
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
-          sonobuoy-version: latest
-          # terraform-version: latest
+          # sonobuoy-version: latest
+          terraform-version: latest
 
   slim-no-sudo-versions:
     docker:
@@ -212,8 +212,8 @@ jobs:
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          # terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          terraform-version: 1.2.7
 
   slim-sudo-latest:
     docker:
@@ -230,8 +230,8 @@ jobs:
           # inspec-version: latest
           # istioctl-version: latest
           # kubectl-version: latest
-          sonobuoy-version: latest
-          # terraform-version: latest
+          # sonobuoy-version: latest
+          terraform-version: latest
 
   slim-sudo-versions:
     docker:
@@ -248,8 +248,8 @@ jobs:
           # inspec-version: 5.18.14
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          # terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          terraform-version: 1.2.7
 
   ubuntu-machine-latest:
     machine:
@@ -263,8 +263,8 @@ jobs:
           # helm-version: latest 
           # istioctl-version: latest
           # kubectl-version: latest
-          sonobuoy-version: latest
-          # terraform-version: latest
+          # sonobuoy-version: latest
+          terraform-version: latest
       # - run:
       #     name: install nokogiri as awspec dependency
       #     command: gem install nokogiri
@@ -286,8 +286,8 @@ jobs:
           # helm-version: 3.9.3
           # istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
-          sonobuoy-version: 0.56.10
-          # terraform-version: 1.2.7
+          # sonobuoy-version: 0.56.10
+          terraform-version: 1.2.7
       # - run:
       #     name: install nokogiri as awspec dependency
       #     command: gem install nokogiri
