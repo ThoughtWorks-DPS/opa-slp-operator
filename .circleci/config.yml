@@ -120,10 +120,8 @@ jobs:
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
-          # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
-          terraform-version: latest
 
   alpine-no-sudo-versions:
     docker:
@@ -156,10 +154,9 @@ jobs:
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
-          # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
-          terraform-version: latest
+          # terraform-version: latest
 
   alpine-sudo-versions:
     docker:
@@ -192,10 +189,8 @@ jobs:
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
-          # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
-          terraform-version: latest
 
   slim-no-sudo-versions:
     docker:
@@ -228,10 +223,8 @@ jobs:
           # datadog-version: latest
           # helm-version: latest 
           # inspec-version: latest
-          # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
-          terraform-version: latest
 
   slim-sudo-versions:
     docker:
@@ -261,10 +254,8 @@ jobs:
           # argocd-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          # istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
-          terraform-version: latest
       # - run:
       #     name: install nokogiri as awspec dependency
       #     command: gem install nokogiri
