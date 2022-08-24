@@ -15,6 +15,10 @@ parameters:
     description: circleci machine to use for operator build jobs
     type: string
     default: ubuntu-2204:2022.07.1
+  registry:
+    description: image registsry
+    type: string
+    default: docker.io
 
 on-push-main: &on-push-main
   branches:
@@ -49,7 +53,7 @@ commands:
       - kube/packages:
           use-sudo: true
           kubectl-version: 1.24.4
-          kind: 0.14.0
+          kind-version: 0.14.0
       - kube/packages:
           use-sudo: false
           bats-version: 1.7.0
