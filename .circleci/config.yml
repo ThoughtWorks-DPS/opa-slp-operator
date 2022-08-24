@@ -22,7 +22,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apk add --no-cache curl bash build-base gcc g++ make
+            apk add --no-cache curl bash build-base gcc g++ make jq
 
             echo 'install ruby'
             apk add --no-cache ruby ruby-dev ruby-webrick ruby-bundler
@@ -45,7 +45,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apk add --no-cache curl bash build-base gcc g++ make
+            sudo apk add --no-cache curl bash build-base gcc g++ make jq
             
             echo 'install ruby'
             sudo apk add --no-cache ruby ruby-dev ruby-webrick ruby-bundler
@@ -68,7 +68,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            apt-get update && apt-get install --no-install-recommends -y curl bash gcc g++ make
+            apt-get update && apt-get install --no-install-recommends -y curl bash gcc g++ make jq
 
             echo 'install ruby'
             apt-get install --no-install-recommends -y ruby-full 
@@ -89,7 +89,7 @@ commands:
       - run:
           name: add dependencies to circleci-remote-docker image
           command: |
-            sudo apt-get update && sudo apt-get install --no-install-recommends -y curl bash gcc g++ make
+            sudo apt-get update && sudo apt-get install --no-install-recommends -y curl bash gcc g++ make jq
 
             echo 'install ruby'
             sudo apt-get install --no-install-recommends -y ruby-full 
