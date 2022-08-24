@@ -162,13 +162,13 @@ jobs:
       - run:
           name: version tag the SHA
           command: make docker-version-tag
+      - run:
+          name: push releaes version
+          command: make docker-push-tag
       - cosign/sign:
           registry: << pipeline.parameters.registry >>
           image: opa-slp-operator
           tag: ${CIRCLE_TAG}
-      - run:
-          name: push releaes version
-          command: make docker-push-tag
 
 workflows:
   version: 2
