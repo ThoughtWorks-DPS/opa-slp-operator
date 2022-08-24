@@ -119,8 +119,8 @@ jobs:
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          inspec-version: latest
-          # istioctl-version: latest
+          # inspec-version: latest
+          istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
@@ -137,8 +137,8 @@ jobs:
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
-          inspec-version: 5.18.14
-          # istioctl-version: 1.14.3
+          # inspec-version: 5.18.14
+          istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
@@ -155,8 +155,8 @@ jobs:
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          inspec-version: latest
-          # istioctl-version: latest
+          # inspec-version: latest
+          istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
@@ -173,8 +173,8 @@ jobs:
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
-          inspec-version: 5.18.14
-          # istioctl-version: 1.14.3
+          # inspec-version: 5.18.14
+          istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
@@ -191,8 +191,8 @@ jobs:
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          inspec-version: latest
-          # istioctl-version: latest
+          # inspec-version: latest
+          istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
@@ -209,8 +209,8 @@ jobs:
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
-          inspec-version: 5.18.14
-          # istioctl-version: 1.14.3
+          # inspec-version: 5.18.14
+          istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
@@ -227,8 +227,8 @@ jobs:
           # bats-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          inspec-version: latest
-          # istioctl-version: latest
+          # inspec-version: latest
+          istioctl-version: latest
           #  kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
@@ -245,8 +245,8 @@ jobs:
           # bats-version: 1.7.0
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
-          inspec-version: 5.18.14
-          # istioctl-version: 1.14.3
+          # inspec-version: 5.18.14
+          istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
@@ -261,8 +261,7 @@ jobs:
           # argocd-version: latest
           # datadog-version: latest
           # helm-version: latest 
-          # 
-          # istioctl-version: latest
+          istioctl-version: latest
           # kubectl-version: latest
           # sonobuoy-version: latest
           # terraform-version: latest
@@ -285,7 +284,7 @@ jobs:
           # argocd-version: 2.4.10
           # datadog-version: 0.44.0
           # helm-version: 3.9.3
-          # istioctl-version: 1.14.3
+          istioctl-version: 1.14.3
           # kubectl-version: 1.24.3
           # sonobuoy-version: 0.56.10
           # terraform-version: 1.2.7
@@ -296,7 +295,7 @@ jobs:
           use-sudo: false
           # awspec-version: 1.28.0
           # bats-version: 1.7.0
-          inspec-version: 5.18.14
+          # inspec-version: 5.18.14
 
 workflows:
   version: 2
