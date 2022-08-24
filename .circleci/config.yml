@@ -57,12 +57,6 @@ commands:
       - kube/packages:
           use-sudo: false
           bats-version: 1.7.0
-      # - run:
-      #     name: install kind
-      #     command: go install sigs.k8s.io/kind@v0.14.0
-      # - run:
-      #     name: install bats
-      #     command: npm install -g bats@1.7.0
       - run:
           name: Confirm Docker registry environment variables are configured and correct
           command: |
@@ -154,6 +148,8 @@ jobs:
       - run:
           name: fetch signing keys
           command: |
+            op inject -i op.env -o $BASH_ENV
+            source $BASH_ENV
             op inject -i cosign.key.env -o cosign.key
             op inject -i cosign.pub.env -o cosign.pub
       - run:
