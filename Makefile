@@ -53,6 +53,7 @@ endif
 
 # Image URL to use all building/pushing image targets
 IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
+IMG_SHA ?= $(IMAGE_TAG_BASE):dev.$(shell echo $(CIRCLE_SHA1) | head -c 8)
 
 .PHONY: all
 all: docker-build
@@ -87,6 +88,14 @@ docker-build: ## Build docker image with the manager.
 .PHONY: docker-push
 docker-push: ## Push docker image with the manager.
 	docker push ${IMG}
+
+.PHONY: docker-pull-sha
+docker-pull-sha: ## Push docker image with the manager.
+	docker pull ${IMG_SHA}
+
+.PHONY: docker-version-tag
+docker-version-tag: ## Push docker image with the manager.
+	docker tag ${IMG_SHA} ${IMG}
 
 ##@ Deployment
 
