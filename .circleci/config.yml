@@ -331,4 +331,3 @@ workflows:
       - ubuntu-machine-versions:
           context: << pipeline.parameters.context >>
           filters: *on-push-main
-  
