@@ -18,7 +18,7 @@ parameters:
   registry:
     description: image registsry
     type: string
-    default: docker.io
+    default: docker.io/twdps
 
 on-push-main: &on-push-main
   branches:
