@@ -49,3 +49,18 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the name of the DAS system credentials secret
+*/}}
+{{- define "slp.defaultSystemCredentialsFilename" -}}
+{{ .Values.namespace }}-{{ include "slp.name" . }}-credentials
+{{- end }}
+
+{{- define "slp.systemCredentialsFilename" -}}
+{{- default (include "slp.defaultSystemCredentialsFilename" .) .Values.systemCredentialsFilenameOverride | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{- define "slp.systemCredentialsSecretName" -}}
+{{- default "das.yaml" .Values.systemCredentialsSecretNameOverride | trunc 63 | trimSuffix "-" }}
+{{- end }}

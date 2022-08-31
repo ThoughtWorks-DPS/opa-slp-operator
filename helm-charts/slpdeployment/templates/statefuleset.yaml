@@ -27,7 +27,7 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
-          - "--config-file=/config/das.yaml"
+          - "--config-file=/config/{{ include "slp.systemCredentialsSecretName" . }}"
           - "--addr=0.0.0.0:8080"
         livenessProbe:
           httpGet:
@@ -71,7 +71,7 @@ spec:
       volumes:
       - name: {{ .Values.namespace }}-{{ include "slp.name" . }}-credentials-vol
         secret:
-          secretName: {{ .Values.namespace }}-{{ include "slp.name" . }}-credentials
+          secretName: {{ include "slp.systemCredentialsFilename" . }}
           items:
           - key: das.yaml
             path: das.yaml

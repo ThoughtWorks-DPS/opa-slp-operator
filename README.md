@@ -81,14 +81,6 @@ Inited using operator-sdk.
 # initialize a new empty operator helm template
 1. operator-sdk init --plugins helm --domain twdps.io --group opa --version v1alpha1 --kind SlpDeployment
 
-
-IMG
-VERSION
-IMAGE_TAG_BASE
-
-
-Start serving end-point '[::]:8000'
-
 ## to use this helm-managed slp deploy operator
 
 - depends upon a credentials secrets already being deployed in the namespace where you deploy a resource request

@@ -8,6 +8,11 @@ systemId: ""
 # deployed in which should also match the das System
 namespace: ""
 
+# use to override the name of the secret filename for fetching the DAS System opa token
+# by default this will be <namespace>-<chart name>-credentials
+systemCredentialsFilenameOverride: ""
+systemCredentialsSecretNameOverride: ""
+
 # specify the storage class name for the persistent volume template
 storageClassName: "" 
 
