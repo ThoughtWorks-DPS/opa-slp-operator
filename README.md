@@ -74,7 +74,9 @@ stringData:
 
 ## Usage
 
-
+```bash
+curl https://raw.githubusercontent.com/ThoughtWorks-DPS/opa-slp-operator/main/resources.yaml | kubectl apply -f -
+```
 ### development
 
 Inited using operator-sdk.  
