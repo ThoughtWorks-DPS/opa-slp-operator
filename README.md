@@ -1,41 +1,13 @@
 # opa-slp-operator
 
-The opa-sl-operator deploys the Styra Local Plane configured to match the Styra system pattern where all opa sidecars in a namespace share the same styra System and it's associated policy configuration.  
+The opa-sl-operator automates the configuration and deployment of the Styra Local Plane within individual kubernetes namespaces.  
 
-**example:**  
 
-Assume a development team at book-info company is named the `publications` team since they own the product domain of _publications_ within the book-info SaaS. The publications team's path to production is through the following environments:  
+## Usage
 
-dev => qa => production  
+**requirements**
 
-and that these environments equate to the matching namespaces of:  
-
-publications-dev => publications-qa => publications-prod  
-
-The publications team has a single git repository named `publications-authorization-policies` in which their team specific rego policies are maintained. There may be a styra Stack or shared libraries containing additional policies that will be included in their policy bundle.
-
-The team would create matching Systems in their organization's Styra tenant, tied to the associated branches in the publications-authorization-policies_ repo:  
-
-Systems:  
-- publications-dev => dev branch  
-- publications-qa => qa branch  
-- publications-prod => prod branch  
-
-Typically, it is recommended that the policy release pipeline for the policies repo follow a pattern of:  
-
-The team develops their policies within the repo using trunk-based-development against the `main` (or `master`) branch. The repo pipeline will then merge all changes pushed to `main` into the dev branch.  
-
-To trigger a release to production, the team tags the main branch with the appropriate semantic version (or other versioning scheme as desired). Tagging causes the pipeline to first merge with the QA branch, and then upon approval further merge with the prod branch.  
-
-Each of these branches is pulled in the respective styra System by the DAS github integration.  
-
-> Within Styra, the publications-dev system can either immediately publish all such changes out to the slp's pulling from publications-dev or wait for a human to 'Publish' in the DAS UI depending on the workflow desired by the team. They may wish to take advantage of Styra's playback features before committing changes to all or only some of the environments.  
-
-## requirements or assumptions
-
-* This operator expects that the necessary DAS System opa token will already exist in the namespace, published as a kubernetes secret in the following format:  
-
-_note: always confirm the url endpoint for your styra tenant_  
+The operator expects that the necessary DAS System opa token will already exist in the namespace, published as a kubernetes secret. The template below uses the default naming conventions. You may further customize these in the customr resource request.  
 
 ```yaml
 apiVersion: v1
@@ -70,22 +42,84 @@ stringData:
       url: https://{{ styra tenant }}.styra.com/v1/bundles
 ```
 
-* This operator does not manage the mechanism whereby the opa-sidecar is deployed nor the EnvoyFilter necessary to direct traffic to the sidecar before the associated api. A team will either need to include opa in their deployment definition, or the cluster configuration will need to include management of namespace annotations, envoy filter, and a mutatingwebhook and admission controller to enable automatic injection with each deployment.  
+### Deploy Operator
 
-## Usage
+Use the `resources.yaml` file to create the opa-system namespace and deploy the operator.    
 
 ```bash
 curl https://raw.githubusercontent.com/ThoughtWorks-DPS/opa-slp-operator/main/resources.yaml | kubectl apply -f -
 ```
-### development
+Wait a few seconds and confirm the operator is running.  
+```bash
+$ kubectl get all -n opa-system
+NAME                                                       READY   STATUS    RESTARTS        AGE
+pod/opa-slp-operator-controller-manager-56474d7c8b-zdt6q   2/2     Running   0               13s
 
-Inited using operator-sdk.  
+NAME                                                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/opa-slp-operator-controller-manager-metrics-service   ClusterIP   10.100.65.100    <none>        8443/TCP   2d
 
-# initialize a new empty operator helm template
-1. operator-sdk init --plugins helm --domain twdps.io --group opa --version v1alpha1 --kind SlpDeployment
+NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/opa-slp-operator-controller-manager   1/1     1            1           2d
 
-## to use this helm-managed slp deploy operator
+NAME                                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/opa-slp-operator-controller-manager-56474d7c8b   1         1         1       13s
+```
 
-- depends upon a credentials secrets already being deployed in the namespace where you deploy a resource request
-- the credentials secret must have the following format
+Once deployed the opa-slp-operator will watch all namespaces for SlpDeployment custom resource requests. When a custom resource request is deployed the operator will deploy and instance of the Styra Local Plane to the requesting namespace. Open policy agents running in the namespace may now be configured to featch their policy bundles directly from the local slp service.  
 
+### Apply SLP resource request
+
+```bash
+cat <<EOF | kubetl apply -f -
+apiVersion: opa.twdps.io/v1alpha1
+kind: SlpDeployment
+metadata:
+  name: slpdeployment-example
+spec:
+  tenant: my-styra-das-tenant
+  systemId: my-das-system-id
+  namespace: my-namespace-name
+EOF
+```
+
+Check to see that the slp service is now running in your namespace.  
+```bash
+$ kubectl get all -n my-namespace
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/my-namespace-slp-0         2/2     Running   0          2d1h
+
+NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/my-namespace-slp    ClusterIP   10.106.169.56   <none>        8080/TCP   2d1h
+
+NAME                                 READY   AGE
+statefulset.apps/my-namespace-slp    1/1     2d1h
+```
+
+The slp is now ready to serve the policy bundles from the specified Styra System.  
+
+Slp is deployed as a stateful set and will define a persistent volume claim for a scratch area to log decision results. Refer to the Styra [documentation](https://docs.styra.com/policies/policy-organization/systems/use-styra-local-plane) for additional details about the local plane service.  
+
+Read [Custom SLP Resource parameters](doc/resource_request_parameters.yaml) for additional configuration parameters.  
+
+**Please Note** This operator does not manage the mechanism whereby the opa-sidecar is deployed nor the EnvoyFilter necessary to direct traffic to the sidecar before the associated api. A team will either need to include opa in their deployment definition, or the cluster configuration will need to include management of namespace annotations, envoy filter, and a mutatingwebhook and admission controller to enable automatic injection with each deployment.  
+
+#### Helm deployment alternative
+
+_pending_  
+
+[Helm](https://helm.sh) must be installed to use the charts.  Please refer to Helm's [documentation](https://helm.sh/docs) to get started.  
+
+Once Helm has been set up correctly, add the twdps repo as follows:  
+
+```bash
+helm repo add twdps https://ThoughtWorks-DPS.github.io/helm-charts && helm repo update
+```
+
+To deploy the opa-slp-operator chart:  
+```bash
+helm install opa-slp-operator twdps/opa-slp-operator  
+```
+
+See chart documentation for configurable parameters.  
+
+This operator was built using the [operator-sdk](https://sdk.operatorframework.io)  
