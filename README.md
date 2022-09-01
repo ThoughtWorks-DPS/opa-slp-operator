@@ -1,7 +1,15 @@
-# opa-slp-operator
+<div align="center">
+	<p>
+		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
+    <br />
+		<img alt="DPS Title" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/EMPCPlatformStarterKitsImage.png?sanitize=true" width=350/>
+	</p>
+  <h3>opa-slp-operator</h3>
+  <a href="https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/opa-slp-operator"><img src="https://circleci.com/gh/ThoughtWorks-DPS/opa-slp-operator.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/ThoughtWorks-DPS/opa-slp-operator"></a>
+</div>
+<br />
 
-The opa-sl-operator automates the configuration and deployment of the Styra Local Plane within individual kubernetes namespaces.  
-
+The opa-sl-operator automates the configuration and deployment of a Styra Local Plane within individual kubernetes namespaces.  
 
 ## Usage
 
